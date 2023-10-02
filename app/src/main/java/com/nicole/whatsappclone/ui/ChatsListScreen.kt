@@ -49,20 +49,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.nicole.whatsappclone.R
-import com.nicole.whatsappclone.ui.ui.theme.WhatsAppCloneTheme
-
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            WhatsAppCloneTheme {
-                val user = Users("Nicole", "", "hola q tal?")
-                ChatListItem(user)
-            }
-        }
-    }
-}
-
+import com.nicole.whatsappclone.ui.theme.WhatsAppCloneTheme
 
 data class Users(val name: String, var image: String?, val message: String)
 
@@ -164,7 +151,7 @@ fun TopBarConf() {
 }
 
 @Composable
-fun ChatListScreen(){
+fun ChatsListScreen(){
     val context = LocalContext.current
     Scaffold (
         topBar = {
@@ -229,6 +216,6 @@ fun ChatListPreview(){
 @Composable
 fun ChatListScreenPreview(){
     WhatsAppCloneTheme {
-        ChatListScreen()
+        ChatsListScreen()
     }
 }

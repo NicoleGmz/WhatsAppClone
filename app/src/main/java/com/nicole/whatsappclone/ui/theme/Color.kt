@@ -1,4 +1,4 @@
-package com.nicole.whatsappclone.ui.ui.theme
+package com.nicole.whatsappclone.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
