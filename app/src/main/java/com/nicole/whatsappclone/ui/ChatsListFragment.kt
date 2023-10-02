@@ -1,6 +1,7 @@
 package com.nicole.whatsappclone.ui
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
@@ -21,19 +22,18 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.Icon
 import androidx.compose.material.TopAppBar
+import androidx.compose.material.icons.outlined.Chat
 import androidx.compose.material.icons.outlined.MoreVert
 import androidx.compose.material.icons.outlined.PhotoCamera
 import androidx.compose.material.icons.outlined.Search
-import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarColors
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.ExperimentalComposeApi
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -42,6 +42,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -136,7 +137,9 @@ fun TabRowBar(){
 fun TopBarConf() {
     TopAppBar(
         title = {
-            Text(stringResource(R.string.app_name))
+            Text(
+                text = stringResource(R.string.app_name),
+                color = MaterialTheme.colorScheme.primary)
         },
         actions = {
             IconButton(
@@ -155,12 +158,14 @@ fun TopBarConf() {
                 Icon(Icons.Outlined.MoreVert, contentDescription = null)
             }
         },
-        backgroundColor = MaterialTheme.colorScheme.primary
+        backgroundColor = MaterialTheme.colorScheme.primaryContainer,
+        contentColor = MaterialTheme.colorScheme.primary
     )
 }
 
 @Composable
 fun ChatListScreen(){
+    val context = LocalContext.current
     Scaffold (
         topBar = {
             TopBarConf()
@@ -170,6 +175,18 @@ fun ChatListScreen(){
                 TabRowBar()
                 ChatList(ListItems.chatsGroupsData)
 
+            }
+        },
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = {
+                    Toast.makeText(context, "In construction", Toast.LENGTH_SHORT).show()
+                },
+                shape = CircleShape,
+                containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                contentColor = MaterialTheme.colorScheme.secondary
+            ){
+                Icon(Icons.Outlined.Chat, contentDescription = null)
             }
         }
     )

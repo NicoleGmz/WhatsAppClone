@@ -3,4 +3,7 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_tutorial1">Tutorial1Activity</string>
     <string name="title_activity_main2">MainActivity2</string>
+    <string name="title_activity_not_working_fragment">NotWorkingFragment</string>
+    <string name="title_activity_calls_fragment">CallsFragment</string>
+    <string name="title_activity_states_fragments">StatesFragments</string>
 </resources>
