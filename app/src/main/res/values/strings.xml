@@ -6,4 +6,6 @@
     <string name="title_activity_not_working_fragment">NotWorkingFragment</string>
     <string name="title_activity_calls_fragment">CallsFragment</string>
     <string name="title_activity_states_fragments">StatesFragments</string>
+    <string name="title_activity_whatsapp_tab_row">WhatsappTabRow</string>
+    <string name="title_activity_whatsapp">WhatsappActivity</string>
 </resources>

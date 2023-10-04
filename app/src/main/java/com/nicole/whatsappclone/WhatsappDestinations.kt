@@ -4,7 +4,7 @@ interface WhatsappDestination{
     val route: String
 }
 object ChatsList: WhatsappDestination{
-    override val route = "chatslist"
+    override val route = "chats_list"
 }
 
 
@@ -21,4 +21,4 @@ object States: WhatsappDestination{
     override val route = "states"
 }
 
-val whatsappTabRowScreens = listOf(ChatsList, Call, States)
+val whatsappTabRowScreens = listOf(ChatsList, Calls, States)

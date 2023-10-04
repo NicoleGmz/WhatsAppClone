@@ -9,6 +9,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -94,9 +95,10 @@ fun ChatListItem(user: Users){
 }
 
 @Composable
-fun ChatList(data: List<Users>){
+fun ChatList(data: List<Users>, innerPaddingValues: PaddingValues){
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(4.dp),
+        modifier = Modifier.padding(innerPaddingValues)
     ) {
             items(data){
                 item -> ChatListItem(item)
@@ -105,7 +107,7 @@ fun ChatList(data: List<Users>){
     }
 }
 
-@Composable
+/*@Composable
 fun TabRowBar(){
     var state by remember { mutableStateOf(0) }
     val titles = listOf("Chats", "States", "Calls")
@@ -118,7 +120,7 @@ fun TabRowBar(){
             )
         }
     }
-}
+}*/
 
 @Composable
 fun TopBarConf() {
@@ -154,14 +156,10 @@ fun TopBarConf() {
 fun ChatsListScreen(){
     val context = LocalContext.current
     Scaffold (
-        topBar = {
-            TopBarConf()
-        },
         content = { innerPadding ->
-            Column (modifier = Modifier.padding(innerPadding)){
-                TabRowBar()
-                ChatList(ListItems.chatsGroupsData)
-
+            Column {
+                //TabRowBar()
+                ChatList(ListItems.chatsGroupsData, innerPadding)
             }
         },
         floatingActionButton = {
@@ -187,13 +185,13 @@ fun previewTopAppBar(){
     }
 }
 
-@Preview(showBackground = true)
+/*@Preview(showBackground = true)
 @Composable
 fun previewTabRowBar(){
     WhatsAppCloneTheme {
         TabRowBar()
     }
-}
+}*/
 
 @Preview (showBackground = true)
 @Composable
@@ -208,7 +206,7 @@ fun ChatListItemPreview(){
 @Composable
 fun ChatListPreview(){
     WhatsAppCloneTheme {
-        ChatList(ListItems.chatsGroupsData)
+       // ChatList(ListItems.chatsGroupsData, innerPaddingValues = PaddingValues)
     }
 }
 

@@ -13,33 +13,12 @@
         android:theme="@style/Theme.WhatsAppClone"
         tools:targetApi="31">
         <activity
-            android:name=".ui.StatesFragments"
-            android:exported="false"
-            android:label="@string/title_activity_states_fragments"
-            android:theme="@style/Theme.WhatsAppClone" />
-        <activity
-            android:name=".ui.CallsFragment"
-            android:exported="false"
-            android:label="@string/title_activity_calls_fragment"
-            android:theme="@style/Theme.WhatsAppClone" />
-        <activity
-            android:name=".ui.NotWorkingFragment"
-            android:exported="false"
-            android:label="@string/title_activity_not_working_fragment"
-            android:theme="@style/Theme.WhatsAppClone" />
-        <activity
-            android:name=".ui.MainActivity2"
-            android:exported="false"
-            android:label="@string/title_activity_main2"
-            android:theme="@style/Theme.WhatsAppClone" />
-        <activity
-            android:name=".ui.MainActivity"
+            android:name=".WhatsappActivity"
             android:exported="true"
             android:label="@string/title_activity_main"
             android:theme="@style/Theme.WhatsAppClone">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
