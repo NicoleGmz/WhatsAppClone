@@ -1,8 +1,10 @@
 package com.nicole.whatsappclone.data.model
 
-data class Contact(
+data class User(
+    val id: String,
     val name: String,
+    val nameDisplayed: String,
     val number: String,
     val image: String?,
-    val chat: Chat
+    val groups: List<Group>
 )

@@ -5,5 +5,5 @@ data class Profile(
     val image: String?,
     val state: String,
     val number: String,
-    val contact: List<Contact>
+    val contact: List<User>
 )

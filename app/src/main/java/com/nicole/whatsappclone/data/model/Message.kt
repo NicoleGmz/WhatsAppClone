@@ -3,7 +3,8 @@ package com.nicole.whatsappclone.data.model
 import java.util.Date
 
 data class Message(
-    val contact: Contact,
+    val id: String,
+    val sentBy: User,
     val date: Date,
-    val text: String
+    val message: String
 )
