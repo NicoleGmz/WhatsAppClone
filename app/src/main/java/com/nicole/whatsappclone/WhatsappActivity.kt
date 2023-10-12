@@ -3,37 +3,40 @@ package com.nicole.whatsappclone
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.nicole.whatsappclone.ui.ChatList
-import com.nicole.whatsappclone.ui.ListItems
-import com.nicole.whatsappclone.ui.TabRowBar
-import com.nicole.whatsappclone.ui.WhatsappTabBar
+import com.nicole.whatsappclone.data.service.StorageImpl
+import com.nicole.whatsappclone.data.service.StorageService
+import com.nicole.whatsappclone.ui.GroupsViewModel
+import com.nicole.whatsappclone.ui.WhatsappTabRow
 import com.nicole.whatsappclone.ui.WhatsappTopBar
 import com.nicole.whatsappclone.ui.theme.WhatsAppCloneTheme
 
 class WhatsappActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            WhatsappApp()
+            val viewModel = GroupsViewModel(storageService = StorageImpl())
+            WhatsappApp(viewModel)
         }
     }
 }
 
 @Composable
-fun WhatsappApp() {
+fun WhatsappApp(viewModel: GroupsViewModel) {
+    viewModel.getGroup()
     WhatsAppCloneTheme {
         val navController = rememberNavController()
         val currentBackStack by navController.currentBackStackEntryAsState()
@@ -47,7 +50,7 @@ fun WhatsappApp() {
             },
             content = { innerPadding ->
                 Column(modifier = Modifier.padding(innerPadding)) {
-                    TabRowBar(
+                    WhatsappTabRow(
                         whatsappTabRowScreens,
                         onTabSelected = { newScreen ->
                             navController.navigateSingleTopTo(newScreen.route)
@@ -64,10 +67,12 @@ fun WhatsappApp() {
     }
 }
 
-@Preview(showBackground = true)
+/*
+@Preview
+@PreviewParameter
 @Composable
-fun WhatsappAppPreview() {
+fun WhatsappAppPreview(viewModel: GroupsViewModel) {
     WhatsAppCloneTheme {
-       WhatsappApp()
+       WhatsappApp(viewModel)
     }
-}
+}*/
