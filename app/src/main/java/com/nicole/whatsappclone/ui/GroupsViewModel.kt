@@ -7,8 +7,10 @@ import kotlinx.coroutines.launch
 
 class GroupsViewModel(private  val storageService: StorageService): ViewModel() {
 
-    fun getGroup(){
-        viewModelScope.launch { storageService.getGroup() }
+    private val userId = "AmBQSY3ElVrdA83NR7vI"
+
+    fun getUserInfo(){
+        viewModelScope.launch { storageService.getUserInfo(userId) }
     }
 
 }

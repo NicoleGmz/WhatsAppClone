@@ -6,7 +6,7 @@ data class Group(
     val id: String,
     val createdAt: Date,
     val createdBy: User,
-    val members: List<User>,
+    val members: List<String>,
     val name: String,
     val type: Int,
     )
