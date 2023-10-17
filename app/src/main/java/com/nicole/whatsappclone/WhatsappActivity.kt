@@ -36,7 +36,7 @@ class WhatsappActivity : ComponentActivity() {
 
 @Composable
 fun WhatsappApp(viewModel: GroupsViewModel) {
-    viewModel.getGroup()
+    viewModel.getUserInfo()
     WhatsAppCloneTheme {
         val navController = rememberNavController()
         val currentBackStack by navController.currentBackStackEntryAsState()

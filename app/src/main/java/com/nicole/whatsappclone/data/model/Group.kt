@@ -1,12 +1,15 @@
 package com.nicole.whatsappclone.data.model
 
-import java.util.*
+import com.google.firebase.Timestamp
+import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.DocumentId
+import com.google.firebase.firestore.DocumentReference
 
 data class Group(
-    val id: String,
-    val createdAt: Date,
-    val createdBy: User,
-    val members: List<String>,
-    val name: String,
-    val type: Int,
+    @DocumentId val id: String = "",
+    val createdAt: Timestamp = Timestamp.now(),
+    val createdBy: DocumentReference? = null,
+    val members: List<DocumentReference> = emptyList(),
+    val name: String = "",
+    val type: Int = 0,
     )

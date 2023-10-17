@@ -6,6 +6,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
+import com.nicole.whatsappclone.data.model.Group
 import com.nicole.whatsappclone.data.model.Message
 import com.nicole.whatsappclone.data.model.User
 import kotlinx.coroutines.Dispatchers
@@ -19,17 +20,23 @@ class StorageImpl : StorageService{
     private val db = Firebase.firestore
     private val storage = Firebase.storage
     private lateinit var user: User
+    private val groupList: MutableList<Group> = mutableListOf()
 
 
     override suspend fun getUserInfo(userId: String){
         val source = Source.CACHE
         db.collection("Users").document(userId).get(source).addOnSuccessListener { documentSnapshot ->
-            user = documentSnapshot.toObject<User>()!!
-            Log.d(TAG, "${documentSnapshot.id} => ${documentSnapshot.data}")
+            if (documentSnapshot != null){
+                user = documentSnapshot.toObject<User>()!!
+                Log.d(TAG, "${documentSnapshot.id} => ${documentSnapshot.data}")
+            }else{
+                Log.d(TAG, "error in the document in the database")
+            }
         }.addOnFailureListener { exception ->
             Log.w(TAG, "Error getting documents: ", exception)
         }.await()
         getProfileImage(userId)
+        getGroups(userId)
     }
     override suspend fun getProfileImage(userId: String) {
         val imageId= db.collection("Users")
@@ -49,23 +56,18 @@ class StorageImpl : StorageService{
         Log.d(TAG, localFile.path)
         user.image = localFile.path
     }
-    override suspend fun getGroups(userId: String) {
-        TODO("Not yet implemented")
-        /*val document = db.collection("Users")
-            .document(userId)
-            .get()
-            .addOnSuccessListener { document ->
-                if(document != null){
-                    document.toObject<User>()
-                    Log.d(TAG, "User snapshot data: ${document.data}")
-                }else{
-                    Log.d(TAG, "No such document")
-                }
-            }
-            .addOnFailureListener {exception ->
-                Log.d(TAG, "get failed with ", exception)
-            }*/
 
+    override suspend fun getGroups(userId: String) {
+        for(group in user.groups){
+            db.collection("Groups").document(group.id).get()
+                .addOnSuccessListener { document ->
+                    groupList.add(document.toObject<Group>()!!)
+                    Log.d(TAG, "${document.id} => ${document.data}")
+                }
+                .addOnFailureListener {exception ->
+                    Log.d(TAG, "get failed with ", exception)
+                }.await()
+        }
     }
     override suspend fun getMessages(userId: String, groupId: String): List<Message> {
         TODO("Not yet implemented")
