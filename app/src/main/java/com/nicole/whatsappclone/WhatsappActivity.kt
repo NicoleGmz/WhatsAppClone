@@ -3,24 +3,18 @@ package com.nicole.whatsappclone
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.nicole.whatsappclone.data.service.StorageImpl
-import com.nicole.whatsappclone.data.service.StorageService
 import com.nicole.whatsappclone.ui.GroupsViewModel
-import com.nicole.whatsappclone.ui.WhatsappTabRow
-import com.nicole.whatsappclone.ui.WhatsappTopBar
+import com.nicole.whatsappclone.ui.utils.WhatsappTabRow
+import com.nicole.whatsappclone.ui.utils.WhatsappTopBar
 import com.nicole.whatsappclone.ui.theme.WhatsAppCloneTheme
 
 class WhatsappActivity : ComponentActivity() {

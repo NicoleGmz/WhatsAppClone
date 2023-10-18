@@ -1,4 +1,4 @@
-package com.nicole.whatsappclone.ui
+package com.nicole.whatsappclone.ui.utils
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
