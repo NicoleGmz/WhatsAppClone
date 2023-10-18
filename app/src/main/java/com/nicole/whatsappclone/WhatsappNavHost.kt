@@ -5,10 +5,9 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
-import com.nicole.whatsappclone.ui.CallsScreen
-import com.nicole.whatsappclone.ui.ChatsListScreen
-import com.nicole.whatsappclone.ui.NotWorkingScreen
-import com.nicole.whatsappclone.ui.StatesScreen
+import com.nicole.whatsappclone.ui.calls.CallsScreen
+import com.nicole.whatsappclone.ui.chatslist.ChatsListScreen
+import com.nicole.whatsappclone.ui.utils.NotWorkingScreen
 
 @Composable
 fun WhatsappNavHost(
@@ -28,8 +27,8 @@ fun WhatsappNavHost(
             //StatesScreen()
         }
         composable( route = Calls.route){
-            NotWorkingScreen()
-            //CallsScreen()
+            //NotWorkingScreen()
+            CallsScreen()
         }
     }
 }
