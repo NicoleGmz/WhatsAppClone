@@ -29,6 +29,7 @@ import androidx.compose.material.icons.rounded.CallReceived
 import androidx.compose.material.icons.rounded.Link
 import androidx.compose.material.icons.rounded.Videocam
 import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -156,7 +157,10 @@ fun CallsScreen(){
                 },
                 shape = RoundedCornerShape(16.dp),
                 containerColor = MaterialTheme.colorScheme.secondaryContainer,
-                contentColor = MaterialTheme.colorScheme.secondary
+                contentColor = MaterialTheme.colorScheme.secondary,
+                elevation = FloatingActionButtonDefaults.elevation(
+                    defaultElevation = 0.dp
+                )
             ){
                 Icon(Icons.Rounded.AddIcCall, contentDescription = null)
             }

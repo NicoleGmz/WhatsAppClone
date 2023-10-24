@@ -20,6 +20,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.Icon
 import androidx.compose.material.icons.outlined.Chat
 import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -98,7 +99,7 @@ fun ChatsListScreen(){
         content = { innerPadding ->
             Column(modifier = Modifier.padding(innerPadding)) {
                 //TabRowBar()
-                ChatList(ChatList.chatsGroupsData)
+                ChatList(ChatsList.chatsGroupsData)
             }
         },
         floatingActionButton = {
@@ -108,7 +109,10 @@ fun ChatsListScreen(){
                 },
                 shape = CircleShape,
                 containerColor = MaterialTheme.colorScheme.secondaryContainer,
-                contentColor = MaterialTheme.colorScheme.secondary
+                contentColor = MaterialTheme.colorScheme.secondary,
+                elevation = FloatingActionButtonDefaults.elevation(
+                    defaultElevation = 0.dp
+                )
             ){
                 Icon(Icons.Outlined.Chat, contentDescription = null)
             }
@@ -130,7 +134,7 @@ fun ChatListItemPreview(){
 @Composable
 fun ChatListPreview(){
     WhatsAppCloneTheme {
-       ChatList(ChatList.chatsGroupsData)
+       ChatList(ChatsList.chatsGroupsData)
     }
 }
 

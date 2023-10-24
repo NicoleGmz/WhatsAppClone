@@ -17,8 +17,8 @@ object Calls: WhatsappDestination{
     override val route = "Calls"
 }
 
-object States: WhatsappDestination{
-    override val route = "States"
+object Status: WhatsappDestination{
+    override val route = "Status"
 }
 
-val whatsappTabRowScreens = listOf(ChatsList, Calls, States)
+val whatsappTabRowScreens = listOf(ChatsList, Calls, Status)

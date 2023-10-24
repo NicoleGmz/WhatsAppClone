@@ -1,6 +1,6 @@
 package com.nicole.whatsappclone.ui.chatslist
 
-object ChatList {
+object ChatsList {
 
     val chatsGroupsData = listOf<Users>(
         Users("Agus", "", "q tal??"),

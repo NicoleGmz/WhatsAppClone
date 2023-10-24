@@ -24,8 +24,8 @@ class StorageImpl : StorageService{
 
 
     override suspend fun getUserInfo(userId: String){
-        val source = Source.CACHE
-        db.collection("Users").document(userId).get(source).addOnSuccessListener { documentSnapshot ->
+        //val source = Source.CACHE
+        db.collection("Users").document(userId).get().addOnSuccessListener { documentSnapshot ->
             if (documentSnapshot != null){
                 user = documentSnapshot.toObject<User>()!!
                 Log.d(TAG, "${documentSnapshot.id} => ${documentSnapshot.data}")
