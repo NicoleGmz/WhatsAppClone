@@ -1,31 +1,59 @@
 package com.nicole.whatsappclone.ui.utils
 
-import androidx.compose.material.Tab
-import androidx.compose.material.TabRow
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.pager.PagerState
+import androidx.compose.material3.Tab
+import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import com.nicole.whatsappclone.WhatsappDestination
+import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun WhatsappTabRow(
     allScreens: List<WhatsappDestination>,
     onTabSelected: (WhatsappDestination) -> Unit,
-    currentScreen: WhatsappDestination
+    currentScreen: WhatsappDestination,
+    pagerState: PagerState
 ){
-    val state by remember { mutableIntStateOf(0) }
+    val scope = rememberCoroutineScope()
+    var state by remember { mutableIntStateOf(0) }
     TabRow(selectedTabIndex = state){
-        allScreens.forEach { screen ->
+        allScreens.forEachIndexed { index, screen ->
             Tab(
                 text = { Text(screen.route) },
-                selected = currentScreen == screen,
-                onClick = { onTabSelected(screen) }
+                selected = (currentScreen == screen && state == index),
+                onClick = {
+                    onTabSelected(screen)
+                    state = index
+                }
             )
         }
     }
+
+    LaunchedEffect(state){
+        scope.launch {
+            pagerState.animateScrollToPage(state)
+        }
+    }
+
+    LaunchedEffect(pagerState.currentPage, pagerState.isScrollInProgress){
+        if(!pagerState.isScrollInProgress){
+            scope.launch {
+                state = pagerState.currentPage
+                onTabSelected(allScreens[pagerState.currentPage])
+            }
+        }
+    }
 }
+
 
 ///Another implementation not used here
 /*

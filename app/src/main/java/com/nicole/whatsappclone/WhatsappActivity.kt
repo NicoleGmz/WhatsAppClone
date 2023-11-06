@@ -3,10 +3,16 @@ package com.nicole.whatsappclone
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -28,6 +34,7 @@ class WhatsappActivity : ComponentActivity() {
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun WhatsappApp(viewModel: GroupsViewModel) {
     viewModel.getUserInfo()
@@ -37,6 +44,10 @@ fun WhatsappApp(viewModel: GroupsViewModel) {
         val currentDestination = currentBackStack?.destination
         val currentScreen =
             whatsappTabRowScreens.find { it.route == currentDestination?.route } ?: ChatsList
+
+        val pagerState = rememberPagerState {
+            whatsappTabRowScreens.size
+        }
 
         Scaffold(
             topBar = {
@@ -49,12 +60,17 @@ fun WhatsappApp(viewModel: GroupsViewModel) {
                         onTabSelected = { newScreen ->
                             navController.navigateSingleTopTo(newScreen.route)
                         },
-                        currentScreen = currentScreen
+                        currentScreen = currentScreen,
+                        pagerState = pagerState
                     )
-                    WhatsappNavHost(
-                        navController = navController,
-                        modifier = Modifier
-                    )
+                    HorizontalPager(
+                        state = pagerState,
+                        modifier = Modifier.fillMaxWidth().weight(1f)){
+                            WhatsappNavHost(
+                                navController = navController,
+                                modifier = Modifier
+                            )
+                    }
                 }
             }
         )
