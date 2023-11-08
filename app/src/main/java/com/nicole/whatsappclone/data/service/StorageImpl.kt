@@ -2,10 +2,10 @@ package com.nicole.whatsappclone.data.service
 
 import android.util.Log
 import com.google.firebase.firestore.Source
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.ktx.toObject
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
+import com.google.firebase.firestore.firestore
+import com.google.firebase.firestore.toObject
+import com.google.firebase.Firebase
+import com.google.firebase.storage.storage
 import com.nicole.whatsappclone.data.model.Group
 import com.nicole.whatsappclone.data.model.Message
 import com.nicole.whatsappclone.data.model.User
