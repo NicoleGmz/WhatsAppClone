@@ -46,10 +46,8 @@ fun WhatsappTabRow(
 
     LaunchedEffect(pagerState.currentPage, pagerState.isScrollInProgress){
         if(!pagerState.isScrollInProgress){
-            scope.launch {
-                state = pagerState.currentPage
-                onTabSelected(allScreens[pagerState.currentPage])
-            }
+            state = pagerState.currentPage
+            onTabSelected(allScreens[state])
         }
     }
 }
