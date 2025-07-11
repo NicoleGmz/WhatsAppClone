@@ -7,41 +7,34 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.whatsappclone.presentation.view.chatList.ChatsListScreen
 import com.example.whatsappclone.ui.theme.WhatsAppCloneTheme
 
-class MainActivity : ComponentActivity() {
+class WhatsappActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             WhatsAppCloneTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                WhatsappAppScreen()
             }
         }
     }
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    WhatsAppCloneTheme {
-        Greeting("Android")
+fun WhatsappAppScreen(){
+    Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+        ChatsListScreen(modifier = Modifier.padding(innerPadding))
     }
 }
+
+@Preview
+@Composable
+fun WhatsappAppScreenPreview(){
+    WhatsappAppScreen()
+}
+
