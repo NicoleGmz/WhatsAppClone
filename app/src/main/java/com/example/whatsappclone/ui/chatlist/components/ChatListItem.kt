@@ -1,4 +1,4 @@
-package com.example.whatsappclone.presentation.view.chatList.components
+package com.example.whatsappclone.ui.chatlist.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image

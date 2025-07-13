@@ -4,14 +4,12 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.example.whatsappclone.presentation.view.chatList.ChatsListScreen
+import com.example.whatsappclone.ui.WhatsappScreen
+import com.example.whatsappclone.ui.chatlist.ChatsListScreen
 import com.example.whatsappclone.ui.theme.WhatsAppCloneTheme
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
@@ -37,22 +35,10 @@ class WhatsappActivity : ComponentActivity() {
         }
         setContent {
             WhatsAppCloneTheme {
-                WhatsappAppScreen()
+                WhatsappScreen()
             }
         }
     }
 }
 
-@Composable
-fun WhatsappAppScreen(){
-    Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-        ChatsListScreen(modifier = Modifier.padding(innerPadding))
-    }
-}
-
-@Preview
-@Composable
-fun WhatsappAppScreenPreview(){
-    WhatsappAppScreen()
-}
 
