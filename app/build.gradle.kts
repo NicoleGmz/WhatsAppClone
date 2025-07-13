@@ -4,6 +4,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.hilt.android)
+    alias(libs.plugins.kotlin.kapt)
 }
 
 android {
@@ -30,12 +32,12 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlin {
         compilerOptions {
-            jvmTarget = JvmTarget.fromTarget("11")
+            jvmTarget = JvmTarget.fromTarget("17")
         }
     }
     buildFeatures {
@@ -56,6 +58,18 @@ dependencies {
     implementation(libs.material3)
     implementation(libs.icons.extended)
     implementation(libs.splashscreen)
+
+    //Hilt
+
+    implementation(libs.hilt.android)
+    implementation(libs.hilt.navigation.compose)
+    kapt(libs.hilt.compiler)
+    kaptTest(libs.hilt.compiler)
+    kaptAndroidTest(libs.hilt.compiler)
+    androidTestImplementation(libs.hilt.android.testing)
+    testImplementation(libs.hilt.android.testing)
+
+    //Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.espresso.core)
