@@ -1,10 +1,12 @@
-package com.example.whatsappclone.presentation.view.chatList
+package com.example.whatsappclone.ui
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Chat
@@ -31,21 +33,30 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.whatsappclone.presentation.view.chatList.components.ChatList
-import com.example.whatsappclone.presentation.view.chatList.components.ChatListAux
-import com.example.whatsappclone.ui.theme.WhatsAppCloneTheme
 import com.example.whatsappclone.R
+import com.example.whatsappclone.ui.chatlist.ChatsListScreen
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ChatsListScreen(modifier: Modifier = Modifier){
+fun WhatsappApp(modifier: Modifier = Modifier){
     val context = LocalContext.current
+
+    var selectedItem by remember { mutableIntStateOf(0) }
+
+    val items = listOf(stringResource(R.string.chats), stringResource(R.string.status), stringResource(R.string.calls))
+    val selectedIcons = listOf(Icons.AutoMirrored.Filled.Chat, Icons.Filled.Favorite, Icons.Filled.Call)
+    val unselectedIcons = listOf(Icons.AutoMirrored.Outlined.Chat, Icons.Outlined.FavoriteBorder, Icons.Outlined.Call)
+    val pagerState = rememberPagerState { items.size }
+    val coroutineScope = rememberCoroutineScope()
+
     Scaffold (
         modifier = modifier,
         topBar = {
@@ -92,10 +103,6 @@ fun ChatsListScreen(modifier: Modifier = Modifier){
             }
         },
         bottomBar = {
-            var selectedItem by remember { mutableIntStateOf(0) }
-            val items = listOf("Chats", "Status", "Calls")
-            val selectedIcons = listOf(Icons.AutoMirrored.Filled.Chat, Icons.Filled.Favorite, Icons.Filled.Call)
-            val unselectedIcons = listOf(Icons.AutoMirrored.Outlined.Chat, Icons.Outlined.FavoriteBorder, Icons.Outlined.Call)
             NavigationBar(
                 containerColor = MaterialTheme.colorScheme.surface,
                 contentColor = MaterialTheme.colorScheme.secondary
@@ -111,26 +118,37 @@ fun ChatsListScreen(modifier: Modifier = Modifier){
                         label = {
                             Text(item)
                         },
-                        selected = selectedItem == index,
+                        selected = selectedItem == index && pagerState.currentPage == index,
                         onClick = {
                             selectedItem = index
+                            coroutineScope.launch {
+                                pagerState.animateScrollToPage(index)
+                            }
                         }
                     )
                 }
             }
         },
         content = { innerPadding ->
-            Column(modifier = Modifier.padding(innerPadding)) {
-                ChatList(ChatListAux.chatsGroupsData)
+            HorizontalPager(
+                state = pagerState,
+                modifier = Modifier.padding(innerPadding)
+            ) { index ->
+                when (index) {
+                    0 -> ChatsListScreen()
+                    1 -> ChatsListScreen()
+                    2 -> ChatsListScreen()
+                }
             }
+            /*Column(modifier = Modifier.padding(innerPadding)) {
+                ChatsListScreen()
+            }*/
         }
     )
 }
 
 @Preview
 @Composable
-fun ChatsListScreenPreview(){
-    WhatsAppCloneTheme {
-        ChatsListScreen()
-    }
+fun WhatsappAppPreview(){
+    WhatsappApp()
 }
