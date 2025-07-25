@@ -1,4 +1,4 @@
-package com.example.whatsappclone.ui.chatlist.components
+package com.example.whatsappclone.presentation.view.chatList.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.lazy.LazyColumn

@@ -1,4 +1,4 @@
-package com.example.whatsappclone.ui.chatlist.components
+package com.example.whatsappclone.presentation.view.chatList.components
 
 object ChatListAux {
     val chatsGroupsData = listOf<Users>(
